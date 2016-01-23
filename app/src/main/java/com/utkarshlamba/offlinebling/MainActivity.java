@@ -45,14 +45,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 FragmentManager fm = getFragmentManager();
                 Fragment fragment;
-
-                if (position == 0){
-
-
-                }
-                else{
-                    if (position == 1){
-                        fragment = new Fragment();
+                    if (position == 0){
+                        fragment = new SearchItemFragment();
                     }
                     else if (position == 2){
                         fragment = new Fragment();
@@ -63,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
                     fm.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
-                }
 
 
 
