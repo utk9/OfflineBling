@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="drawer_items">
-        <item>Search Item Wiki</item>
+    <string-array
+        name="list_options_array">
+        <item>Wikipedia</item>
         <item>Wolfram Alpha</item>
-        <item>place_holder</item>
+        <item>PlaceHolder3</item>
     </string-array>
 </resources>
