@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     ActionBarDrawerToggle drawerToggle;
     ProgressDialog pd;
 
+    public static String smsBody;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,27 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.closeDrawer(drawerList);
             }
         });
-
-
-
-//        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
-//                toolbar, R.string.drawer_open, R.string.drawer_close) {
-//
-//            /** Called when a drawer has settled in a completely closed state. */
-//            public void onDrawerClosed(View view) {
-//                super.onDrawerClosed(view);
-//                //mtitle
-//                getActionBar().setTitle("Views");
-//                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-//            }
-//
-//            /** Called when a drawer has settled in a completely open state. */
-//            public void onDrawerOpened(View drawerView) {
-//                super.onDrawerOpened(drawerView);
-//                getActionBar().setTitle("Views");
-//                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-//            }
-//        };
 
         Button toggleButton = (Button) findViewById(R.id.toggle_button);
         toggleButton.setOnClickListener(new View.OnClickListener() {

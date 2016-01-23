@@ -13,8 +13,8 @@ import android.widget.TextView;
  */
 public class QueryResultsFragment extends Fragment {
 
-    private String query;
     private String info;
+    private String query;
 
     public QueryResultsFragment(String info) {
         //this.query = query;
@@ -32,7 +32,7 @@ public class QueryResultsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         TextView infoTextView = (TextView) getActivity().findViewById(R.id.query_info_textView);
         TextView titleTextView = (TextView) getActivity().findViewById(R.id.query_title_textView);
-        titleTextView.setText(SearchItemFragment.smsBody);
+        titleTextView.setText(MainActivity.smsBody);
         infoTextView.setText(info);
     }
 }
