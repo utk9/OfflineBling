@@ -40,12 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
         pd = new ProgressDialog(this);
 
-        String [] drawerListOptions = getResources().getStringArray(R.array.drawer_items);
+        String [] drawerListOptions = getResources().getStringArray(R.array.list_options_array);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.left_drawer);
-        ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, drawerListOptions);
+        ListArrayAdapter drawerAdapter = new ListArrayAdapter(this, drawerListOptions);
 
 
         drawerList.setAdapter(drawerAdapter);
