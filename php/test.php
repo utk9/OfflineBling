@@ -5,9 +5,9 @@
     header("content-type: text/xml");
     echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 
-    $twilioAPI => $config["twilioAPI"];
-    $accountSID => $config["accountSID"];
-    $authToken => $config["authToken"];
+    $twilioAPI = $config["twilioAPI"];
+    $accountSID = $config["accountSID"];
+    $authToken = $config["authToken"];
 
     $message = $_POST["Body"];
     $term = "";
