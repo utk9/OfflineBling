@@ -21,10 +21,20 @@ import android.widget.Toast;
  */
 public class SearchItemFragment extends Fragment {
 
-    private static final String PHONE_NUMBER = "6476915061";
+    public static final String PHONE_NUMBER = "6476915061";
 
     private static final String SMS_SENT = "SMS_SENT";
     private static final String SMS_DELIVERED = "SMS_DELIVERED";
+
+    private static final String WIKI_COMMAND = "wiki ";
+
+    public static String smsBody;
+
+    ProgressDialog progressDialog;
+
+    public SearchItemFragment(ProgressDialog pd){
+        progressDialog = pd;
+    }
 
 
     @Nullable
@@ -41,7 +51,7 @@ public class SearchItemFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String smsBody = queryEditText.getText().toString();
+                smsBody = queryEditText.getText().toString();
                 if (smsBody.equals("")){
                     Toast.makeText(getActivity(), "Please fill search field",
                             Toast.LENGTH_LONG).show();
@@ -53,10 +63,9 @@ public class SearchItemFragment extends Fragment {
 
 
                     SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(PHONE_NUMBER, null, smsBody, null, null);
+                    smsManager.sendTextMessage(PHONE_NUMBER, null, WIKI_COMMAND+smsBody, null, null);
                     SpannableString ss=  new SpannableString("Please wait.");
                     ss.setSpan(new RelativeSizeSpan(1.5f), 0, ss.length(), 0);
-                    ProgressDialog progressDialog = new ProgressDialog(getActivity());
                     progressDialog.setMessage(ss);
                     progressDialog.setTitle("Searching");
                     progressDialog.show();
