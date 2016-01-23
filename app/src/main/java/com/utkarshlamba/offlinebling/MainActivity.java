@@ -12,11 +12,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
@@ -69,28 +71,45 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.closeDrawer(drawerList);
             }
         });
-        ;
 
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
-                toolbar, R.string.drawer_open, R.string.drawer_close) {
 
-            /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                //mtitle
-                getActionBar().setTitle("Views");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+
+//        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
+//                toolbar, R.string.drawer_open, R.string.drawer_close) {
+//
+//            /** Called when a drawer has settled in a completely closed state. */
+//            public void onDrawerClosed(View view) {
+//                super.onDrawerClosed(view);
+//                //mtitle
+//                getActionBar().setTitle("Views");
+//                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+//            }
+//
+//            /** Called when a drawer has settled in a completely open state. */
+//            public void onDrawerOpened(View drawerView) {
+//                super.onDrawerOpened(drawerView);
+//                getActionBar().setTitle("Views");
+//                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+//            }
+//        };
+
+        Button toggleButton = (Button) findViewById(R.id.toggle_button);
+        toggleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (drawerLayout.isDrawerOpen(Gravity.LEFT)){
+                    drawerLayout.closeDrawer(drawerList);
+
+                }
+                else{
+                    drawerLayout.openDrawer(Gravity.LEFT);
+                }
+
             }
-
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                getActionBar().setTitle("Views");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
-
-        registerReceiver(new SMSReceiver(fm, pd), new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
+        });
+        IntentFilter intentFilter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
+        intentFilter.setPriority(999999999);
+        registerReceiver(new SMSReceiver(fm, pd), intentFilter);
 
 
     }

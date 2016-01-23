@@ -21,10 +21,12 @@ import android.widget.Toast;
  */
 public class SearchItemFragment extends Fragment {
 
-    private static final String PHONE_NUMBER = "6476915061";
+    public static final String PHONE_NUMBER = "6476915061";
 
     private static final String SMS_SENT = "SMS_SENT";
     private static final String SMS_DELIVERED = "SMS_DELIVERED";
+
+    private static final String WIKI_COMMAND = "wiki ";
 
     public static String smsBody;
 
@@ -61,7 +63,7 @@ public class SearchItemFragment extends Fragment {
 
 
                     SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(PHONE_NUMBER, null, smsBody, null, null);
+                    smsManager.sendTextMessage(PHONE_NUMBER, null, WIKI_COMMAND+smsBody, null, null);
                     SpannableString ss=  new SpannableString("Please wait.");
                     ss.setSpan(new RelativeSizeSpan(1.5f), 0, ss.length(), 0);
                     progressDialog.setMessage(ss);
