@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         pd = new ProgressDialog(this);
 
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new SearchItemFragment(pd);
                     }
                     else if (position == 2){
-                        fragment = new Fragment();
+                        fragment = new WolframAlphaSearchItemFragment(pd);
                     }
                     else {
                         fragment = new Fragment();
