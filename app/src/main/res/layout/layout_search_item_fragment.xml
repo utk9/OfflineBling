@@ -11,7 +11,8 @@
         android:text="Large Text"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal"
-        android:paddingTop="16 dp" />
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp" />
 
     <EditText
         android:layout_width="match_parent"
