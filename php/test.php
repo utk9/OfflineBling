@@ -51,7 +51,7 @@
     {
     	$xml = simplexml_load_file("https://en.wikipedia.org/w/api.php?format=xml&action=query&prop=extracts&exintro=&explaintext=&titles=" . $term);
     	$plainText = $xml->query->pages->page->extract;
-    	if(strlen($plainText) >= 1600)
+    	if(strlen($plainText) >= 800)
     	{
     		$tooLong = true;
     	}
@@ -62,7 +62,7 @@
 	<?php
 		if ($tooLong) 
 		{
-			echo "<Message>" . substr($plainText, 0, 1597) . "...</Message>";
+			echo "<Message>" . substr($plainText, 0, 797) . "...</Message>";
 		}
 		else
 		{
