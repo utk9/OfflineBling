@@ -27,7 +27,6 @@ public class WolframAlphaSearchItemFragment extends Fragment {
 
     private static final String WOLFRAM_COMMAND = "wolfram ";
 
-    public static String smsBody;
 
     ProgressDialog progressDialog;
 
@@ -49,8 +48,8 @@ public class WolframAlphaSearchItemFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                smsBody = queryEditText.getText().toString();
-                if (smsBody.equals("")){
+                MainActivity.smsBody = queryEditText.getText().toString();
+                if (MainActivity.smsBody.equals("")){
                     Toast.makeText(getActivity(), "Please fill search field",
                             Toast.LENGTH_LONG).show();
                 }
@@ -61,7 +60,7 @@ public class WolframAlphaSearchItemFragment extends Fragment {
 
 
                     SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(PHONE_NUMBER, null, WOLFRAM_COMMAND+smsBody, null, null);
+                    smsManager.sendTextMessage(PHONE_NUMBER, null, WOLFRAM_COMMAND+MainActivity.smsBody, null, null);
                     SpannableString ss=  new SpannableString("Please wait.");
                     ss.setSpan(new RelativeSizeSpan(1.5f), 0, ss.length(), 0);
                     progressDialog.setMessage(ss);
