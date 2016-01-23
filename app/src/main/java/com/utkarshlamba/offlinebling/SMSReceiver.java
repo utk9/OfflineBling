@@ -1,5 +1,7 @@
 package com.utkarshlamba.offlinebling;
 
+import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +14,12 @@ import android.util.Log;
  */
 public class SMSReceiver extends BroadcastReceiver {
     private String TAG = SMSReceiver.class.getSimpleName();
+    private FragmentManager fm;
+    private ProgressDialog pd;
 
-    public SMSReceiver() {
+    public SMSReceiver(FragmentManager fm, ProgressDialog pd) {
+        this.fm = fm;
+        this.pd=pd;
     }
 
     @Override
@@ -44,7 +50,9 @@ public class SMSReceiver extends BroadcastReceiver {
             }
 
             // Display the entire SMS Message
-            Log.e(TAG, str);
+            //progressDialog.close();
+            pd.dismiss();
+            fm.beginTransaction().replace(R.id.content_frame, new QueryResultsFragment(str)).commit();
         }
     }
 }

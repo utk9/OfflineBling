@@ -2,7 +2,9 @@ package com.utkarshlamba.offlinebling;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     ListView drawerList;
     ActionBarDrawerToggle drawerToggle;
+    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        pd = new ProgressDialog(this);
 
         String [] drawerListOptions = getResources().getStringArray(R.array.drawer_items);
 
@@ -39,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         drawerList.setAdapter(drawerAdapter);
-
+        final FragmentManager fm = getFragmentManager();
         drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                FragmentManager fm = getFragmentManager();
+
                 Fragment fragment;
                     if (position == 0){
-                        fragment = new SearchItemFragment();
+                        fragment = new SearchItemFragment(pd);
                     }
                     else if (position == 2){
                         fragment = new Fragment();
@@ -84,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
+
+        registerReceiver(new SMSReceiver(fm, pd), new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
 
 
     }
