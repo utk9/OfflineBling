@@ -1,6 +1,7 @@
 package com.utkarshlamba.offlinebling;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -27,8 +28,12 @@ public class FetchDataFromDBTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
 
         try{
-            String link = "http://www.offlinebling.tech/getAllData.php";
+            String link = "http://charliezhang.xyz/offlinebling/getAllData.php";
+
             URL url = new URL(link);
+
+
+
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             InputStream in = new BufferedInputStream(connection.getInputStream());
             BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
@@ -42,15 +47,21 @@ public class FetchDataFromDBTask extends AsyncTask<String, Void, String> {
             JSONObject json = new JSONObject(stringBuilder.toString());
             JSONArray questions = json.getJSONArray("questions");
 
-            FAQFragment.questionsList = new ArrayList<>();
-            FAQFragment.answersList = new ArrayList<>();
+
+
+            FAQFragment.questionsList.clear();
+            FAQFragment.answersList.clear();
+            FAQFragment.countList.clear();
 
             for (int i = 0; i<questions.length(); i++){
                 JSONObject obj = questions.getJSONObject(i);
                 FAQFragment.questionsList.add(obj.getString("question"));
                 FAQFragment.answersList.add(obj.getString("answer"));
+                FAQFragment.countList.add(obj.getInt("count"));
+                Log.e("FetchDataFromDBTask",obj.getString("question") );
             }
         } catch(Exception e){
+            Log.e("FetchDataFromDBTask","exception");
         }
         return null;
     }
@@ -59,6 +70,7 @@ public class FetchDataFromDBTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         FAQFragment.adapter.notifyDataSetChanged();
+        Log.e("FetchDataFromDBTask", "datasetnotified");
     }
 
 }

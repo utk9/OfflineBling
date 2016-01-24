@@ -19,6 +19,7 @@ public class FAQFragment extends Fragment {
     static  ArrayList<String> questionsList;
     static ArrayList<String> answersList;
     static QuestionListAdapter adapter;
+    static ArrayList<Integer> countList;
 
     @Nullable
     @Override
@@ -31,17 +32,14 @@ public class FAQFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         questionsList = new ArrayList<>();
         answersList = new ArrayList<>();
-        questionsList.add("what is your name");
-        answersList.add("john");
-        questionsList.add("what is your jam");
-        answersList.add("sugar strawberry");
+        countList = new ArrayList<>();
 
         ListView listView = (ListView) getActivity().findViewById(R.id.faq_listView);
         adapter = new QuestionListAdapter(getActivity(),
                 questionsList, answersList);
         listView.setAdapter(adapter);
 
-        //new FetchDataFromDBTask().execute();
+        new FetchDataFromDBTask().execute();
 
 
 
