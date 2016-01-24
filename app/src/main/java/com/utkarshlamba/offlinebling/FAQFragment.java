@@ -35,6 +35,14 @@ public class FAQFragment extends Fragment {
         answersList.add("john");
         questionsList.add("what is your jam");
         answersList.add("sugar strawberry");
+        questionsList.add("what is your name");
+        answersList.add("john");
+        questionsList.add("what is your jam");
+        answersList.add("sugar strawberry");
+        questionsList.add("what is your name");
+        answersList.add("john");
+        questionsList.add("what is your jam");
+        answersList.add("sugar strawberry");
 
         ListView listView = (ListView) getActivity().findViewById(R.id.faq_listView);
         adapter = new QuestionListAdapter(getActivity(),
