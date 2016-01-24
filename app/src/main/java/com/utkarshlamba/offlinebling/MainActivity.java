@@ -60,9 +60,11 @@ public class MainActivity extends AppCompatActivity {
                     else if (position == 1){
                         fragment = new WolframAlphaSearchItemFragment(pd);
                     }
-                    else {
+                    else if (position == 2) {
                         fragment = new FAQFragment();
-
+                    }
+                else {
+                        fragment = new AskQuestionFragment(pd);
                     }
 
                     fm.beginTransaction().replace(R.id.content_frame, fragment).commit();
