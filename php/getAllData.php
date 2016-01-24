@@ -18,8 +18,8 @@
 	{
 		while($row = $queryResult->fetch_assoc())
 		{
-			$array[$count]["question"] = $row["question"];
-			$array[$count]["answer"] = $row["answer"];
+			$array[$count]["question"] = str_replace(" i ", " I ", ucfirst($row["question"]));
+			$array[$count]["answer"] = str_replace(" i ", " I ", ucfirst($row["answer"]));
 			$array[$count++]["count"] = $row["count"];
 		}	
 	}

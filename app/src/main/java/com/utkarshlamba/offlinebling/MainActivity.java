@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     ListView drawerList;
     ActionBarDrawerToggle drawerToggle;
     ProgressDialog pd;
+    TextView toolbarTitle;
 
     public static String smsBody;
 
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbarTitle = (TextView)findViewById(R.id.toolbar_title);
 
         pd = new ProgressDialog(this);
 
@@ -48,23 +51,30 @@ public class MainActivity extends AppCompatActivity {
 
 
         drawerList.setAdapter(drawerAdapter);
+        drawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         final FragmentManager fm = getFragmentManager();
+        fm.beginTransaction().replace(R.id.content_frame, new SearchItemFragment(pd)).commit();
         drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Fragment fragment;
+                view.setSelected(true);
                     if (position == 0){
                         fragment = new SearchItemFragment(pd);
+                        toolbarTitle.setText("Wikipedia");
                     }
                     else if (position == 1){
                         fragment = new WolframAlphaSearchItemFragment(pd);
+                        toolbarTitle.setText("Wolfram Alpha");
                     }
                     else if (position == 2) {
                         fragment = new FAQFragment();
+                        toolbarTitle.setText("Help");
                     }
                 else {
                         fragment = new AskQuestionFragment(pd);
+                        toolbarTitle.setText("Ask");
                     }
 
                     fm.beginTransaction().replace(R.id.content_frame, fragment).commit();

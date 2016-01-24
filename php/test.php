@@ -110,7 +110,11 @@
     {
         // Create connection
         $conn = new mysqli($servername, $serverusername, $serverpassword, $database);
-        $userQuestion = mysqli_real_escape_string($conn, substr(strstr($message, ' '), 1));
+        $userQuestion = strtolower(mysqli_real_escape_string($conn, substr(strstr($message, ' '), 1)));
+        if(substr($userQuestion, -1) != "?") 
+        {
+            $userQuestion .= "?";
+        }
         $query = "SELECT answer, count FROM Questions WHERE question='$userQuestion'";
         $answerQuery = $conn->query($query);
 
