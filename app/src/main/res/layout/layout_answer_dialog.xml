@@ -38,14 +38,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Button"
-            android:id="@+id/button"
+            android:id="@+id/cancel_button"
             style="?android:attr/borderlessButtonStyle"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Button"
-            android:id="@+id/button2"
+            android:id="@+id/submit_button"
             android:layout_gravity="center_horizontal"
             style="?android:attr/borderlessButtonStyle" />
     </LinearLayout>

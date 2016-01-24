@@ -40,10 +40,10 @@ public class ListArrayAdapter extends ArrayAdapter<String> {
             imageView.setImageResource(R.drawable.wikipedia128);
         } else if (s.equals("Wolfram Alpha")) {
             imageView.setImageResource(R.drawable.wolfram300);
-        } else if (s.equals("PlaceHolder3")) {
-            imageView.setImageResource(R.drawable.wolfram300);
+        } else if (s.equals("Ask a question")) {
+            imageView.setImageResource(R.drawable.bluequestionmark);
         } else {
-            imageView.setImageResource(R.drawable.wolfram300);
+            imageView.setImageResource(R.drawable.helpfulquestions);
         }
 
         return rowView;
