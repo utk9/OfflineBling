@@ -49,16 +49,22 @@ public class FetchDataFromDBTask extends AsyncTask<String, Void, String> {
 
 
 
-            FAQFragment.questionsList.clear();
-            FAQFragment.answersList.clear();
-            FAQFragment.countList.clear();
+            MainActivity.questionsList.clear();
+            MainActivity.answersList.clear();
+            MainActivity.countList.clear();
 
             for (int i = 0; i<questions.length(); i++){
                 JSONObject obj = questions.getJSONObject(i);
-                FAQFragment.questionsList.add(obj.getString("question"));
-                FAQFragment.answersList.add(obj.getString("answer"));
-                FAQFragment.countList.add(obj.getInt("count"));
-                Log.e("FetchDataFromDBTask",obj.getString("question") );
+                MainActivity.questionsList.add(obj.getString("question"));
+
+                String ans = obj.getString("answer");
+                if (ans.equals("")){
+                    MainActivity.answersList.add("Not answered yet");
+                }
+                else {
+                    MainActivity.answersList.add(ans);
+                }
+                MainActivity.countList.add(obj.getInt("count"));
             }
         } catch(Exception e){
             Log.e("FetchDataFromDBTask","exception");

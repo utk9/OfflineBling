@@ -16,10 +16,8 @@ import java.util.ArrayList;
  */
 public class FAQFragment extends Fragment {
 
-    static  ArrayList<String> questionsList;
-    static ArrayList<String> answersList;
+
     static QuestionListAdapter adapter;
-    static ArrayList<Integer> countList;
 
     @Nullable
     @Override
@@ -30,13 +28,13 @@ public class FAQFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        questionsList = new ArrayList<>();
-        answersList = new ArrayList<>();
-        countList = new ArrayList<>();
+        MainActivity.questionsList = new ArrayList<>();
+        MainActivity.answersList = new ArrayList<>();
+        MainActivity.countList = new ArrayList<>();
 
         ListView listView = (ListView) getActivity().findViewById(R.id.faq_listView);
         adapter = new QuestionListAdapter(getActivity(),
-                questionsList, answersList);
+                MainActivity.questionsList, MainActivity.answersList);
         listView.setAdapter(adapter);
 
         new FetchDataFromDBTask().execute();

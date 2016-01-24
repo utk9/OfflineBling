@@ -4,6 +4,7 @@
         name="list_options_array">
         <item>Wikipedia</item>
         <item>Wolfram Alpha</item>
-        <item>Questions</item>
+        <item>Ask a question</item>
+        <item>Helpful Questions</item>
     </string-array>
 </resources>
