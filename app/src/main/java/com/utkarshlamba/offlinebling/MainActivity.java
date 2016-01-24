@@ -74,32 +74,27 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Fragment fragment = null;
-                view.setSelected(true);
-                    if (position == 0){
-                        fragment = new SearchItemFragment(pd);
-                        toolbarTitle.setText("Wikipedia");
-                    }
-                    else if (position == 1){
-                        fragment = new WolframAlphaSearchItemFragment(pd);
-                        toolbarTitle.setText("Wolfram Alpha");
-                    }
-                    else if (position == 2) {
+                if (position == 0) {
+                    fragment = new SearchItemFragment(pd);
+                    toolbarTitle.setText("Wikipedia");
+                } else if (position == 1) {
+                    fragment = new WolframAlphaSearchItemFragment(pd);
+                    toolbarTitle.setText("Wolfram Alpha");
+                } else if (position == 2) {
 
-                        fragment = new AskQuestionFragment(pd);
-                        toolbarTitle.setText("Ask");
+                    fragment = new AskQuestionFragment(pd);
+                    toolbarTitle.setText("Ask Question");
+                } else {
+                    if (isNetworkAvailable()) {
+                        fragment = new FAQFragment();
+                        toolbarTitle.setText("Helpful Questions");
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                "This feature is only available with an network connection",
+                                Toast.LENGTH_LONG).show();
                     }
-                else {
-                        if (isNetworkAvailable()){
-                            fragment = new FAQFragment();
-                            toolbarTitle.setText("Help");
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(),
-                                    "This feature is only available with an network connection",
-                                    Toast.LENGTH_LONG).show() ;
-                        }
-                    }
-                if (fragment!=null) {
+                }
+                if (fragment != null) {
                     fm.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 }
 
@@ -143,7 +138,10 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_info) {
+            final FragmentManager fm = getFragmentManager();
+            Fragment fragment = new InfoFragment();
+            fm.beginTransaction().replace(R.id.content_frame, fragment).commit();
             return true;
         }
 
