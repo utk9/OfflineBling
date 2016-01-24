@@ -3,8 +3,11 @@ package com.utkarshlamba.offlinebling;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
@@ -20,6 +24,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Fragment fragment;
+                Fragment fragment = null;
                     if (position == 0){
                         fragment = new SearchItemFragment(pd);
                     }
@@ -61,17 +70,26 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new WolframAlphaSearchItemFragment(pd);
                     }
                     else if (position == 2) {
-                        fragment = new FAQFragment();
+
+                        fragment = new AskQuestionFragment(pd);
+
+
                     }
                 else {
-                        fragment = new AskQuestionFragment(pd);
+
+
+                        if (isNetworkAvailable()){
+                            fragment = new FAQFragment();
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),
+                                    "This feature is only available with an network connection",
+                                    Toast.LENGTH_LONG).show() ;
+                        }
                     }
-
+                if (fragment!=null) {
                     fm.beginTransaction().replace(R.id.content_frame, fragment).commit();
-
-
-
-
+                }
 
                 drawerLayout.closeDrawer(drawerList);
             }
@@ -118,5 +136,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean hasActiveInternetConnection() {
+        if (isNetworkAvailable()) {
+            try {
+                HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
+                urlc.setRequestProperty("User-Agent", "Test");
+                urlc.setRequestProperty("Connection", "close");
+                urlc.setConnectTimeout(1500);
+                urlc.connect();
+                return (urlc.getResponseCode() == 200);
+            } catch (IOException e) {
+                Log.e("MainActivity", "Error checking internet connection", e);
+            }
+        } else {
+            Log.d("MainActivity", "No network available!");
+        }
+        return false;
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null;
     }
 }
