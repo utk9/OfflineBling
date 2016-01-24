@@ -6,4 +6,6 @@
     <string name="search_question">What do you want to know about?</string>
     <string name="search_hint_prompt">Enter</string>
     <string name="search_button_title">Go</string>
+    <string name="ask_a_question">Ask your question!</string>
+    <string name="post_button_title">Post</string>
 </resources>
