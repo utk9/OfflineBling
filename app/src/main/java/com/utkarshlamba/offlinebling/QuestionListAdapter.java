@@ -19,7 +19,7 @@ public class QuestionListAdapter extends ArrayAdapter<String> {
     private ArrayList<String> answers;
 
     public QuestionListAdapter(Context context, ArrayList<String> qs, ArrayList<String> ans) {
-        super(context, R.layout.custom_list_item, qs);
+        super(context, R.layout.faq_list_item, qs);
         this.context = context;
         questions = qs;
         answers = ans;
