@@ -19,7 +19,7 @@
         android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="xFFFFFF"
+        android:textColor="#000000"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="This is filler text for the purpose of seeing how the UI will look."
         android:id="@+id/question_dialog_label"

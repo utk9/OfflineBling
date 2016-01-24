@@ -29,6 +29,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
     ListView drawerList;
     ActionBarDrawerToggle drawerToggle;
     ProgressDialog pd;
+
+    static ArrayList<String> questionsList;
+    static ArrayList<String> answersList;
+    static QuestionListAdapter adapter;
+    static ArrayList<Integer> countList;
 
     public static String smsBody;
 
