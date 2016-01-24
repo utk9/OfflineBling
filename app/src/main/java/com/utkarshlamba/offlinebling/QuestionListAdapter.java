@@ -57,7 +57,13 @@ public class QuestionListAdapter extends ArrayAdapter<String> {
                         dialog.findViewById(R.id.question_dialog_label);
                 final EditText answerEditText = (EditText) dialog.findViewById(R.id.answer_editText);
                 questionTextView.setText(MainActivity.questionsList.get(index));
-                answerEditText.setText(MainActivity.answersList.get(index));
+                String answer = MainActivity.answersList.get(index);
+                if (answer.equals("Not answered yet")){
+                    answerEditText.setHint("Not answered yet");
+                } else {
+                    answerEditText.setText(MainActivity.answersList.get(index));
+                }
+
 
                 Button editButton = (Button) dialog.findViewById(R.id.submit_button);
                 Button cancelButton = (Button) dialog.findViewById(R.id.cancel_button);
